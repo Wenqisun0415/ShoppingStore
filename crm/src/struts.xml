@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 配置常量 -->
+	<!-- 配置struts2中一个表单中所上传文件的总大小 -->
+	<constant name="struts.multipart.maxSize" value="5242880"/>
+
+   	<package name="crm" extends="struts-default" namespace="/">
+   		<interceptors>
+   			<interceptor name="privilegeInterceptor" class="crm.web.interceptor.PrivilegeInterceptor"/>
+   		</interceptors>
+   	
+   		<global-results>
+   			<result name="login">/login.jsp</result>
+   		</global-results>
+   	
+   		<!-- User Action -->
+   		<action name="user_*" class="userAction" method="{1}">
+   			<result name="login">/login.jsp</result>
+   			<result name="success" type="redirect">/index.jsp</result>
+   			
+   			<interceptor-ref name="privilegeInterceptor">
+   				<param name="excludeMethods">register, login</param>
+   			</interceptor-ref>
+   			<interceptor-ref name="defaultStack"></interceptor-ref>
+   		</action>
+   		
+   		<!-- Customer Action -->
+   		<action name="customer_*" class="customerAction" method="{1}">
+   			<result name="addUI">/jsp/customer/add.jsp</result>
+   			<result name="findAll">/jsp/customer/list.jsp</result>
+   			<result name="saveSuccess" type="redirectAction">customer_findAll.action</result>
+   			<result name="deleteSuccess" type="redirectAction">customer_findAll.action</result>
+   			<result name="editSuccess">/jsp/customer/edit.jsp</result>
+   			<result name="updateSuccess" type="redirectAction">customer_findAll.action</result>
+   			<!-- 出错页面 -->
+   			<result name="input">/jsp/customer/add.jsp</result>
+   			
+   			
+   			<interceptor-ref name="privilegeInterceptor"/>
+   			<interceptor-ref name="defaultStack">
+   				<param name="fileUpload.maximumSize">2097152</param>
+   				<param name="fileUpload.allowedExtensions">.jpg, .jpeg, .png</param>
+   			</interceptor-ref>
+   		</action>
+   		
+   		<!-- BaseDict Action -->
+   		<action name="baseDict_*" class="baseDictAction" method="{1}">
+   			<interceptor-ref name="privilegeInterceptor"/>
+   			<interceptor-ref name="defaultStack"/>
+   		</action>
+   		
+   		<!-- LinkMan Action -->
+   		<action name="linkMan_*" class="linkManAction" method="{1}">
+   			<result name="findAll">/jsp/linkman/list.jsp</result>
+   			<result name="addUI">/jsp/linkman/add.jsp</result>
+   			<result name="saveSuccess" type="redirectAction">linkMan_findAll.action</result>
+   			<result name="editSuccess">/jsp/linkman/edit.jsp</result>
+   			<result name="updateSuccess" type="redirectAction">linkMan_findAll.action</result>
+   			<result name="deleteSuccess" type="redirectAction">linkMan_findAll.action</result>
+   			
+   			<interceptor-ref name="privilegeInterceptor"/>
+   			<interceptor-ref name="defaultStack"/>
+   		</action>
+   		
+   		<!-- SaleVisit Action -->
+   		<action name="saleVisit_*" class="saleVisitAction" method="{1}">
+   			<result name="findAll">/jsp/salevisit/list.jsp</result>
+   			<result name="addUI">/jsp/salevisit/add.jsp</result>
+   			<result name="saveSuccess" type="redirectAction">saleVisit_findAll.action</result>
+   			<result name="deleteSuccess" type="redirectAction">saleVisit_findAll.action</result>
+   			
+   			<interceptor-ref name="privilegeInterceptor"/>
+   			<interceptor-ref name="defaultStack"/>
+   		</action>
+   	</package>
+	
+</struts>
