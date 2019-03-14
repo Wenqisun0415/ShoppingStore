@@ -80,7 +80,7 @@ public class UserServlet extends BaseServlet {
 					return "/jsp/login.jsp";
 				} else {
 					req.getSession().setAttribute("UserBean", user);
-					resp.sendRedirect("/BookStore/index.jsp");
+					resp.sendRedirect("/ShoppingStore/index.jsp");
 					return null;
 				}
 			} else {
@@ -97,7 +97,7 @@ public class UserServlet extends BaseServlet {
 	public String logout(HttpServletRequest req, HttpServletResponse resp) {
 		req.getSession().invalidate();
 		try {
-			resp.sendRedirect("/BookStore/index.jsp");
+			resp.sendRedirect("/ShoppingStore/index.jsp");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

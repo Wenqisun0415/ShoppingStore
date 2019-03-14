@@ -17,7 +17,7 @@ public class CartServlet extends BaseServlet {
 	
 	public String showCart(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-			resp.sendRedirect("/BookStore/jsp/cart.jsp");
+			resp.sendRedirect("/ShoppingStore/jsp/cart.jsp");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -37,7 +37,7 @@ public class CartServlet extends BaseServlet {
 			}
 			cart.addCartItem(cartItem);
 			req.getSession().setAttribute("cart", cart);
-			resp.sendRedirect("/BookStore/jsp/cart.jsp");
+			resp.sendRedirect("/ShoppingStore/jsp/cart.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -49,7 +49,7 @@ public class CartServlet extends BaseServlet {
 			String pid = req.getParameter("pid");
 			Cart cart = (Cart) req.getSession().getAttribute("cart");
 			cart.removeCartItem(pid);
-			resp.sendRedirect("/BookStore/jsp/cart.jsp");
+			resp.sendRedirect("/ShoppingStore/jsp/cart.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -60,7 +60,7 @@ public class CartServlet extends BaseServlet {
 		try {
 			Cart cart = (Cart) req.getSession().getAttribute("cart");
 			cart.clearCart();
-			resp.sendRedirect("/BookStore/jsp/cart.jsp");
+			resp.sendRedirect("/ShoppingStore/jsp/cart.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

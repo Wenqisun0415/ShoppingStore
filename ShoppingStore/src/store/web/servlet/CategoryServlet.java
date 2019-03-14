@@ -29,6 +29,7 @@ public class CategoryServlet extends BaseServlet {
     			
     			jsonStr = JSONArray.fromObject(cats).toString();
     			
+    			
     			//put into redis
     			jedis.set("cats", jsonStr);
     		}

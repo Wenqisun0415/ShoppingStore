@@ -18,11 +18,11 @@
 
 <script type="text/javascript">
 
-	var url = "/BookStore/CategoryServlet";
+	var url = "/ShoppingStore/CategoryServlet";
 	var params = {"method":"getCats"};
 	$.post(url, params, function(data){
 		$.each(data, function(o, obj) {
-			var li = "<li><a href='/BookStore/ProductServlet?method=findProductsByCat&page=1&cid=" + obj.cid + "'>" + obj.cname + "</a></li>";
+			var li = "<li><a href='/ShoppingStore/ProductServlet?method=findProductsByCat&page=1&cid=" + obj.cid + "'>" + obj.cname + "</a></li>";
 			$("#cat").append(li);
 		});
 	}, "json");
@@ -77,7 +77,7 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/BookStore/index.jsp">首页</a>
+					<a class="navbar-brand" href="/ShoppingStore/index.jsp">首页</a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
