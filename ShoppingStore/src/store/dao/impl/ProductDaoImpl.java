@@ -53,4 +53,21 @@ public class ProductDaoImpl implements ProductDao {
 		return num.intValue();
 	}
 
+	@Override
+	public int findTotalRecords() throws Exception {
+		QueryRunner runner = new QueryRunner(JDBCUtils.getDataSource());
+		String sql = "select count(*) from product";
+		Long num = (Long) runner.query(sql, new ScalarHandler());
+		return num.intValue();
+	}
+
+	@Override
+	public List<Product> findAllWithPage(int startPage, int pageSize) throws Exception {
+		QueryRunner runner = new QueryRunner(JDBCUtils.getDataSource());
+		String sql = "select * from product limit ? offset ?";
+		int offset = (startPage - 1) * pageSize;
+		Object[] params = {pageSize, offset};
+		return runner.query(sql, new BeanListHandler<Product>(Product.class), params);
+	}
+
 }

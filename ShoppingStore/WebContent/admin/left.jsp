@@ -1,4 +1,6 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -23,12 +25,22 @@
 	<script type="text/javascript">
 	
 		d = new dTree('d');
+		/* 
+			param1: 当前节点id 
+			param2: 父节点id
+			param3: 节点上的文字描述
+			param4: 跳转路径
+			param5: 提示信息
+			param6: 发生变化的frame
+			param1: 
+		*/
+		
 		d.add('01',-1,'系统菜单树');
 		
 		d.add('0102','01','分类管理','','','mainFrame');
-		d.add('010201','0102','分类管理','${pageContext.request.contextPath}/admin/category/list.jsp','','mainFrame');
+		d.add('010201','0102','分类管理','${pageContext.request.contextPath}/AdminCategoryServlet?method=findAllCats','','mainFrame');
 		d.add('0104','01','商品管理');
-		d.add('010401','0104','商品管理','${pageContext.request.contextPath}/admin/product/list.jsp','','mainFrame');
+		d.add('010401','0104','商品管理','${pageContext.request.contextPath}/AdminProductServlet?method=findAllWithPage&page=1','','mainFrame');
 		d.add('010402','0104','已下架商品管理','${pageContext.request.contextPath}/admin/product/pushDown_list.jsp','','mainFrame');
 		d.add('0105','01','订单管理');
 		d.add('010501','0105','订单管理','${pageContext.request.contextPath}/admin/order/list.jsp','','mainFrame');

@@ -39,4 +39,15 @@ public class ProductServiceImpl implements ProductService {
 		return pageBean;
 	}
 
+	@Override
+	public PageBean findAllWithPage(int currNum) throws Exception {
+		ProductDao dao = new ProductDaoImpl();
+		int totalRecords = dao.findTotalRecords();
+		PageBean pageBean = new PageBean(currNum, 5, totalRecords);
+		List<Product> list = dao.findAllWithPage(pageBean.getStartPage(), pageBean.getPageSize());
+		pageBean.setList(list);
+		pageBean.setUrl("AdminProductServlet?method=findAllWithPage");
+		return pageBean;
+	}
+
 }
